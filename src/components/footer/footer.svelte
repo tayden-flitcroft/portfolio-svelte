@@ -1,19 +1,10 @@
-<style lang="scss">
-	.open-sans {
-		font-family: 'Open Sans';
-	}
-</style>
-
 <script lang="ts">
 	import { SOCIAL_MEDIA } from '../../helpers/constants'
-	const date = new Date()
 </script>
 
 <footer
 	class="flex flex-col items-center justify-center gap-5 bg-[$accent] p-8 text-center"
 >
-	<h3 class="text-4xl">Tayden Flitcroft</h3>
-
 	<div class="inline-flex w-full items-center justify-center">
 		<hr
 			class="my-8 h-1 w-64 rounded border-0 bg-[$complementary] dark:bg-gray-700"
@@ -60,7 +51,10 @@
 			</li>
 		{/each}
 	</ul>
-	<div class="open-sans text-xs">
-		&#xa9; {date.getFullYear()} Tayden Flitcroft
+	<div class="open-sans mt-4 text-xs">
+		Created and Designed by Tayden Flitcroft
+		<div class="mt-1">
+			&#xa9; {new Date().getFullYear()}
+		</div>
 	</div>
 </footer>

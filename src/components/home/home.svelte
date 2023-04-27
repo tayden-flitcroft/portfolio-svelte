@@ -10,7 +10,7 @@
 	import 'iconify-icon'
 	import { SOCIAL_MEDIA, I_AM_STRINGS } from '../../helpers/constants'
 	import type { SectionData } from '../../global'
-	import { scale } from 'svelte/transition'
+	import { fly, scale, slide } from 'svelte/transition'
 
 	export let sectionData: SectionData
 	let shouldAnimate: boolean = false
@@ -39,7 +39,7 @@
 	{#if shouldAnimate}
 		<div
 			class="flex flex-col justify-center gap-4 sm:items-center sm:text-center"
-			transition:scale={{ duration: 900 }}
+			transition:slide={{ delay: 150, duration: 900 }}
 		>
 			<h1 class="text-6xl sm:text-4xl">Tayden Flitcroft</h1>
 			<div class="typed-wrapper text-2xl">
