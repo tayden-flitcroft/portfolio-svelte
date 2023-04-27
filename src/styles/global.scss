@@ -19,7 +19,7 @@ h2 {
 	font-size: 32px;
 }
 
-* {
+*:not(hr){
     margin: unset;
     padding: unset;
     scroll-behavior: smooth;

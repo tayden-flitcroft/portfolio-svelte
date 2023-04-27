@@ -2,14 +2,6 @@
 	.typed-wrapper {
 		font-family: Poppins;
 	}
-
-	iconify-icon {
-		color: $grey;
-
-		&:hover {
-			color: $complementary;
-		}
-	}
 </style>
 
 <script lang="ts">
@@ -59,7 +51,12 @@
 					{@const { icon, href, title } = item}
 					<li>
 						<a rel="noreferrer" {href} target="_blank">
-							<iconify-icon {icon} alt={title} height="25px" />
+							<iconify-icon
+								{icon}
+								alt={title}
+								height="25px"
+								class="text-[$grey] hover:text-[$complementary]"
+							/>
 						</a>
 					</li>
 				{/each}

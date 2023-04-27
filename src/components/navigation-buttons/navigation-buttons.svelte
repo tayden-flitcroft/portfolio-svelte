@@ -98,42 +98,44 @@
 		: document.body.classList.remove('mobile-navigation-open')
 </script>
 
-<div
-	class={`hidden sm:fixed sm:right-3 sm:top-3 sm:block ${
-		showMobileNavigation ? 'rounded-full bg-[color:$complementary]' : ''
-	}`}
->
-	<Hamburger bind:open={showMobileNavigation} />
-</div>
-
-{#if visibleSectionId !== 'home'}
-	<button
-		class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white hover:opacity-80"
-		on:click|preventDefault={() => {
-			scrollToSection(homeId)
-		}}
-		transition:fly={{ y: 100, duration: 400 }}
+<header>
+	<div
+		class={`hidden sm:fixed sm:right-3 sm:top-3 sm:block ${
+			showMobileNavigation ? 'rounded-full bg-[color:$complementary]' : ''
+		}`}
 	>
-		<iconify-icon icon="ph:arrow-up" height="25px" />
-	</button>
-{/if}
-{#if shouldAnimate}
-	<nav class={`${showMobileNavigation ? 'open' : ''}`}>
-		<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
-			{#each SECTION as item, idx}
-				{@const { title, icon, id } = item}
-				<li transition:fly={{ x: -100, duration: 300 * idx }}>
-					<a
-						data-is-visible={visibleSectionId === id}
-						class="flex h-14 w-14 items-center rounded-full pl-3 text-base hover:pr-3"
-						href={`#${id}`}
-						on:click|preventDefault={() => scrollToSection(id)}
-					>
-						<iconify-icon {icon} height="30px" class="pr-2" />
-						<span>{title}</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</nav>
-{/if}
+		<Hamburger bind:open={showMobileNavigation} />
+	</div>
+
+	{#if visibleSectionId !== 'home'}
+		<button
+			class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white hover:opacity-80"
+			on:click|preventDefault={() => {
+				scrollToSection(homeId)
+			}}
+			transition:fly={{ y: 100, duration: 400 }}
+		>
+			<iconify-icon icon="ph:arrow-up" height="25px" />
+		</button>
+	{/if}
+	{#if shouldAnimate}
+		<nav class={`${showMobileNavigation ? 'open' : ''}`}>
+			<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
+				{#each SECTION as item, idx}
+					{@const { title, icon, id } = item}
+					<li transition:fly={{ x: -100, duration: 300 * idx }}>
+						<a
+							data-is-visible={visibleSectionId === id}
+							class="flex h-14 w-14 items-center rounded-full pl-3 text-base hover:pr-3"
+							href={`#${id}`}
+							on:click|preventDefault={() => scrollToSection(id)}
+						>
+							<iconify-icon {icon} height="30px" class="pr-2" />
+							<span>{title}</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	{/if}
+</header>

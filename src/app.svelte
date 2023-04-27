@@ -4,7 +4,9 @@
 	}
 	body {
 		display: grid;
-		grid-template-columns: 1fr 6fr;
+		grid-template-areas:
+			'header main main main main'
+			'footer footer footer footer footer';
 		height: 100vh;
 	}
 
@@ -17,9 +19,22 @@
 		text-decoration: none;
 	}
 
+	header {
+		grid-area: header;
+	}
+	main {
+		grid-area: main;
+	}
+	footer {
+		grid-area: footer;
+	}
+
 	@media screen and (max-width: $small) {
 		body {
-			grid-template-columns: auto;
+			grid-template-areas:
+				'header'
+				'main'
+				'footer';
 		}
 
 		main {
@@ -84,9 +99,7 @@
 	<Loader />
 {/if}
 
-<header>
-	<NavigationButtons bind:visibleSectionId />
-</header>
+<NavigationButtons bind:visibleSectionId />
 <main>
 	<Home sectionData={sectionDataObj[SECTION_TITLE.HOME]} />
 	<SectionWrapper
