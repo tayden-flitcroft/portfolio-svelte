@@ -1,0 +1,13 @@
+{
+	"arrowParens": "avoid",
+	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"svelteSortOrder": "options-styles-scripts-markup",
+	"bracketSameLine": false,
+	"useTabs": true,
+	"semi": false,
+	"singleQuote": true,
+	"trailingComma": "none",
+	"bracketSpacing": true,
+	"htmlWhitespaceSensitivity": "strict",
+	"quoteProps": "as-needed"
+}

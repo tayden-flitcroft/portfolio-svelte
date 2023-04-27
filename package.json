@@ -1,0 +1,48 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "build": "webpack",
+    "start:dev": "NODE_ENV=development webpack-dev-server"
+  },
+  "author": "Tayden Flitcroft",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
+    "@sveltejs/adapter-node": "^1.2.3",
+    "@tsconfig/svelte": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.39.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "html-webpack-plugin": "^5.5.1",
+    "iconify-icon": "^1.0.7",
+    "postcss": "^8.4.23",
+    "postcss-loader": "^7.2.4",
+    "prettier": "^2.8.8",
+    "prettier-plugin-svelte": "^2.10.0",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2",
+    "svelte-hamburgers": "^2.0.6",
+    "svelte-loader": "^3.1.7",
+    "svelte-preprocess": "^5.0.3",
+    "tailwindcss": "^3.3.2",
+    "terser-webpack-plugin": "^5.3.7",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-dev-server": "^4.13.3"
+  },
+  "dependencies": {
+    "svelte": "^3.58.0",
+    "typed.js": "^2.0.15"
+  }
+}

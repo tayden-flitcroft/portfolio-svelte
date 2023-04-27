@@ -1,0 +1,18 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions": {
+        "allowJs": true,
+        "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "module": "es6",
+        "moduleResolution": "Node",
+        "outDir": "./dist",
+        "preserveValueImports": false,
+        "sourceMap": true,
+        "target": "es2021",
+        "strict": true
+    },
+    "include": ["./src/**/*.ts", "./src/**/*.svelte", "*.cjs", "*.mjs"],
+    "exclude": ["node_modules", "dist", "out"]
+}
