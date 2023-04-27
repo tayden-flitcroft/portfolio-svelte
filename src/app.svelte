@@ -4,7 +4,7 @@
 	}
 	body {
 		display: grid;
-		grid-template-columns: 1fr 5fr;
+		grid-template-columns: 1fr 6fr;
 		height: 100vh;
 	}
 
@@ -53,6 +53,31 @@
 		},
 		{}
 	)
+
+	let visibleSectionId: string =
+		SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)].id
+
+	const isSectionVisible = (id: string): boolean => {
+		const el = document.getElementById(id)
+		if (!el) return false
+
+		const rect = el.getBoundingClientRect()
+
+		return (
+			rect.bottom > 0 &&
+			rect.right > 0 &&
+			rect.left < window.innerWidth &&
+			rect.top < window.innerHeight * 0.5 // Mark as "visible" when section is in top 50% of window
+		)
+	}
+
+	window.addEventListener('scroll', (): void => {
+		SECTION.forEach(({ id }) => {
+			if (isSectionVisible(id)) {
+				visibleSectionId = id
+			}
+		})
+	})
 </script>
 
 {#if showLoader}
@@ -60,20 +85,32 @@
 {/if}
 
 <header>
-	<NavigationButtons />
+	<NavigationButtons bind:visibleSectionId />
 </header>
 <main>
 	<Home sectionData={sectionDataObj[SECTION_TITLE.HOME]} />
-	<SectionWrapper title={SECTION_TITLE.ABOUT}>
+	<SectionWrapper
+		bind:visibleSectionId
+		sectionData={sectionDataObj[SECTION_TITLE.ABOUT]}
+	>
 		<About sectionData={sectionDataObj[SECTION_TITLE.ABOUT]} />
 	</SectionWrapper>
-	<SectionWrapper title={SECTION_TITLE.RESUME}>
+	<SectionWrapper
+		bind:visibleSectionId
+		sectionData={sectionDataObj[SECTION_TITLE.RESUME]}
+	>
 		<Resume sectionData={sectionDataObj[SECTION_TITLE.RESUME]} />
 	</SectionWrapper>
-	<SectionWrapper title={SECTION_TITLE.PROJECTS}>
+	<SectionWrapper
+		bind:visibleSectionId
+		sectionData={sectionDataObj[SECTION_TITLE.PROJECTS]}
+	>
 		<Projects sectionData={sectionDataObj[SECTION_TITLE.PROJECTS]} />
 	</SectionWrapper>
-	<SectionWrapper title={SECTION_TITLE.CONTACT}>
+	<SectionWrapper
+		bind:visibleSectionId
+		sectionData={sectionDataObj[SECTION_TITLE.CONTACT]}
+	>
 		<Contact sectionData={sectionDataObj[SECTION_TITLE.CONTACT]} />
 	</SectionWrapper>
 </main>

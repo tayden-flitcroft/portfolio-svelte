@@ -6,4 +6,4 @@
 	const { id } = sectionData
 </script>
 
-<section {id}>projects</section>
+<div>projects</div>

@@ -6,4 +6,4 @@
 	const { id } = sectionData
 </script>
 
-<section {id}>resume</section>
+<div>resume</div>

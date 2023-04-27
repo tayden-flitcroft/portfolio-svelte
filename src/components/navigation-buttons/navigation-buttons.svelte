@@ -61,10 +61,21 @@
 <script lang="ts">
 	import 'iconify-icon'
 	import { SECTION, SECTION_TITLE } from '../../helpers/constants'
-	import { fade } from 'svelte/transition'
+	import { fly } from 'svelte/transition'
 	import Hamburger from 'svelte-hamburgers'
+	import { onMount } from 'svelte'
+
+	export let visibleSectionId: string
 
 	let showMobileNavigation: boolean = false
+	let shouldAnimate: boolean = false
+
+	const homeId =
+		SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)].id
+
+	onMount(() => {
+		shouldAnimate = true
+	})
 
 	const toggleMobileNavigation = () => {
 		showMobileNavigation = !showMobileNavigation
@@ -74,35 +85,13 @@
 		if (showMobileNavigation) {
 			toggleMobileNavigation()
 		}
-		document
-			?.getElementById(id)
-			?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+		const yOffset = -60 // Offset to back off the section title from top of the viewport
+		const element = document.getElementById(id) as HTMLElement
+		const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+		window.scrollTo({ top: y, behavior: 'smooth' })
 	}
-
-	let visibleId: string =
-		SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)].id
-
-	const isSectionVisible = (id: string): boolean => {
-		const el = document.getElementById(id)
-		if (!el) return false
-
-		const rect = el.getBoundingClientRect()
-
-		return (
-			rect.bottom > 0 &&
-			rect.right > 0 &&
-			rect.left < window.innerWidth &&
-			rect.top < window.innerHeight * 0.35 // Mark as "visible" when section is in top 35% of window
-		)
-	}
-
-	window.addEventListener('scroll', (): void => {
-		SECTION.forEach(({ id }) => {
-			if (isSectionVisible(id)) {
-				visibleId = id
-			}
-		})
-	})
 
 	$: showMobileNavigation
 		? document.body.classList.add('mobile-navigation-open')
@@ -117,35 +106,34 @@
 	<Hamburger bind:open={showMobileNavigation} />
 </div>
 
-{#if visibleId !== 'home'}
+{#if visibleSectionId !== 'home'}
 	<button
 		class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white hover:opacity-80"
-		on:click={() => {
-			scrollToSection(
-				SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)].id
-			)
+		on:click|preventDefault={() => {
+			scrollToSection(homeId)
 		}}
-		transition:fade={{ duration: 300 }}
+		transition:fly={{ y: 100, duration: 400 }}
 	>
 		<iconify-icon icon="ph:arrow-up" height="25px" />
 	</button>
 {/if}
-
-<nav class={`${showMobileNavigation ? 'open' : ''}`}>
-	<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
-		{#each SECTION as item, idx}
-			{@const { title, icon, id } = item}
-			<li transition:fade={{ duration: 250 * idx }}>
-				<a
-					data-is-visible={visibleId === id}
-					class="flex h-14 w-14 items-center rounded-full pl-3 text-base hover:pr-3"
-					href={`#${id}`}
-					on:click|preventDefault={() => scrollToSection(id)}
-				>
-					<iconify-icon {icon} height="30px" class="pr-2" />
-					<span>{title}</span>
-				</a>
-			</li>
-		{/each}
-	</ul>
-</nav>
+{#if shouldAnimate}
+	<nav class={`${showMobileNavigation ? 'open' : ''}`}>
+		<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
+			{#each SECTION as item, idx}
+				{@const { title, icon, id } = item}
+				<li transition:fly={{ x: -100, duration: 300 * idx }}>
+					<a
+						data-is-visible={visibleSectionId === id}
+						class="flex h-14 w-14 items-center rounded-full pl-3 text-base hover:pr-3"
+						href={`#${id}`}
+						on:click|preventDefault={() => scrollToSection(id)}
+					>
+						<iconify-icon {icon} height="30px" class="pr-2" />
+						<span>{title}</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</nav>
+{/if}

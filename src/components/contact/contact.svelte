@@ -5,4 +5,4 @@
 	const { id } = sectionData
 </script>
 
-<section {id}>contact</section>
+<div>contact</div>

@@ -17,7 +17,7 @@
 			display: block;
 			width: 40px;
 			height: 3px;
-			background: #0563bb;
+			background: $complementary;
 			bottom: 0;
 			left: calc(50% - 20px);
 		}
@@ -25,15 +25,32 @@
 </style>
 
 <script lang="ts">
-	export let title: string
+	import type { SectionData } from '../../global'
+	import { fly } from 'svelte/transition'
+
+	export let sectionData: SectionData
 	export let subheader: string = ''
+	export let visibleSectionId: string
+
+	let shouldAnimateSection: boolean = false
+
+	const { title, id } = sectionData
+
+	$: if (visibleSectionId === id) {
+		shouldAnimateSection = true
+	}
 </script>
 
-<div class="text-center">
-	<h2 class="relative mb-5 pb-5 uppercase text-[$main]">{title}</h2>
-	{#if subheader}
-		<div>{subheader}</div>
+<section {id}>
+	{#if shouldAnimateSection}
+		<div transition:fly={{ y: 100, duration: 1000 }}>
+			<div class="text-center">
+				<h2 class="relative mb-5 pb-5 uppercase text-[$main]">{title}</h2>
+				{#if subheader}
+					<div>{subheader}</div>
+				{/if}
+			</div>
+			<slot {sectionData} />
+		</div>
 	{/if}
-</div>
-
-<slot />
+</section>
