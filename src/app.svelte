@@ -55,6 +55,7 @@
 	import type { SectionData } from './global'
 	import Footer from './components/footer/footer.svelte'
 	import SectionWrapper from './components/section-wrapper/section-wrapper.svelte'
+	import { onMount } from 'svelte'
 
 	export let showLoader = false
 
@@ -69,8 +70,7 @@
 		{}
 	)
 
-	let visibleSectionId: string =
-		SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)].id
+	let visibleSectionId: string | null = null
 
 	const isSectionVisible = (id: string): boolean => {
 		const el = document.getElementById(id)
@@ -86,10 +86,19 @@
 		)
 	}
 
-	window.addEventListener('scroll', (): void => {
-		SECTION.forEach(({ id }) => {
-			if (isSectionVisible(id)) {
-				visibleSectionId = id
+	onMount(() => {
+		window.addEventListener('scroll', (): void => {
+			SECTION.forEach(({ id }) => {
+				if (isSectionVisible(id)) {
+					visibleSectionId = id
+				}
+			})
+		})
+		window.addEventListener('load', (): void => {
+			if (!visibleSectionId) {
+				visibleSectionId =
+					SECTION[SECTION.findIndex(item => item.title === SECTION_TITLE.HOME)]
+						.id
 			}
 		})
 	})

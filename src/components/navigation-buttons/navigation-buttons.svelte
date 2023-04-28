@@ -65,7 +65,7 @@
 	import Hamburger from 'svelte-hamburgers'
 	import { onMount } from 'svelte'
 
-	export let visibleSectionId: string
+	export let visibleSectionId: string | null
 
 	let showMobileNavigation: boolean = false
 	let shouldAnimate: boolean = false
@@ -107,7 +107,7 @@
 		<Hamburger bind:open={showMobileNavigation} />
 	</div>
 
-	{#if visibleSectionId !== 'home'}
+	{#if visibleSectionId && visibleSectionId !== homeId}
 		<button
 			class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white hover:opacity-80"
 			on:click|preventDefault={() => {

@@ -30,7 +30,7 @@
 
 	export let sectionData: SectionData
 	export let subheader: string = ''
-	export let visibleSectionId: string
+	export let visibleSectionId: string | null
 
 	let shouldAnimateSection: boolean = false
 
