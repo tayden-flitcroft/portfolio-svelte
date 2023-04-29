@@ -41,7 +41,7 @@
 	}
 </script>
 
-<section {id}>
+<section {id} class="pr-3 sm:pr-0">
 	{#if shouldAnimateSection}
 		<div transition:fly={{ y: 100, duration: 1000 }}>
 			<div class="text-center">
@@ -50,7 +50,7 @@
 					<div>{subheader}</div>
 				{/if}
 			</div>
-			<slot {sectionData} />
+			<slot />
 		</div>
 	{/if}
 </section>

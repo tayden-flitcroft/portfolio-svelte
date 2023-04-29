@@ -3,11 +3,8 @@
 		overflow: hidden;
 	}
 	body {
-		display: grid;
-		grid-template-areas:
-			'header main main main main'
-			'footer footer footer footer footer';
-		height: 100vh;
+		display: flex;
+		flex-direction: column;
 	}
 
 	section {
@@ -19,23 +16,27 @@
 		text-decoration: none;
 	}
 
-	header {
-		grid-area: header;
-	}
 	main {
-		grid-area: main;
-	}
-	footer {
-		grid-area: footer;
+		padding: 0 20px 0 150px;
 	}
 
+	// header {
+	// 	grid-area: header;
+	// }
+	// main {
+	// 	grid-area: main;
+	// }
+	// footer {
+	// 	grid-area: footer;
+	// }
+
 	@media screen and (max-width: $small) {
-		body {
-			grid-template-areas:
-				'header'
-				'main'
-				'footer';
-		}
+		// body {
+		// 	grid-template-areas:
+		// 		'header'
+		// 		'main'
+		// 		'footer';
+		// }
 
 		main {
 			padding: 0 10px;

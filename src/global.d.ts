@@ -11,3 +11,13 @@ export interface SectionData {
     id: string
     title: SECTION_TITLE
 }
+
+export interface LabelProps {
+    class?: string
+}
+
+export interface InputProps {
+    class?: string
+    type?: string
+    autocomplete?: string
+}

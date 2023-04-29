@@ -119,7 +119,7 @@
 		</button>
 	{/if}
 	{#if shouldAnimate}
-		<nav class={`${showMobileNavigation ? 'open' : ''}`}>
+		<nav class={`fixed z-50 ${showMobileNavigation ? 'open' : ''}`}>
 			<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
 				{#each SECTION as item, idx}
 					{@const { title, icon, id } = item}
