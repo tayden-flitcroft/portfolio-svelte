@@ -44,7 +44,7 @@
 				height="25"
 				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out group-hover:bg-[$main] group-hover:text-white"
 			/>
-			San Antonio, Texas
+			<span class="text-gray-600"> San Antonio, Texas </span>
 		</a>
 		<a
 			class="open-sans group my-11 flex items-center gap-4 text-lg"
@@ -55,7 +55,7 @@
 				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out group-hover:bg-[$main] group-hover:text-white"
 				height="25"
 			/>
-			contact@taydenflitcroft.com
+			<span class="text-gray-600"> contact@taydenflitcroft.com </span>
 		</a>
 		<a
 			href="tel:503-569-7894"
@@ -66,7 +66,7 @@
 				icon="material-symbols:phone-android-outline-rounded"
 				height="25"
 			/>
-			+1 (503) 569-7894
+			<span class="text-gray-600"> +1 (503) 569-7894 </span>
 		</a>
 	</div>
 	<form

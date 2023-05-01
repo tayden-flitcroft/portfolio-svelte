@@ -119,7 +119,7 @@
 	{/if}
 	{#if shouldAnimate}
 		<nav
-			class={`fixed bottom-0 left-0 top-0 w-[300px] transition-all duration-300 ease-linear ${
+			class={`fixed bottom-0 left-0 top-0 transition-all duration-300 ease-linear sm:w-[300px] ${
 				hasMobileNavigation
 					? showMobileNavigation
 						? 'translate-x-full'
