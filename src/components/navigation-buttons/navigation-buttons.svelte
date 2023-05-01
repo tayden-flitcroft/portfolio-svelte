@@ -27,15 +27,9 @@
 	}
 
 	@media screen and (max-width: $small) {
-		.open {
-			transform: translateX(0%);
-			animation-duration: 1s;
-			left: 0;
-		}
 		nav {
 			left: -300px;
 			position: fixed;
-			transition: all 0.5s;
 			z-index: 999;
 
 			ul {
@@ -118,24 +112,28 @@
 			<iconify-icon icon="ph:arrow-up" height="25px" />
 		</button>
 	{/if}
-	{#if shouldAnimate}
-		<nav class={`fixed z-50 ${showMobileNavigation ? 'open' : ''}`}>
-			<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
-				{#each SECTION as item, idx}
-					{@const { title, icon, id } = item}
-					<li transition:fly={{ x: -100, duration: 300 * idx }}>
-						<a
-							data-is-visible={visibleSectionId === id}
-							class="flex h-14 w-14 items-center rounded-full pl-3 text-base duration-300 hover:pr-3"
-							href={`#${id}`}
-							on:click|preventDefault={() => scrollToSection(id)}
-						>
-							<iconify-icon {icon} height="30px" class="pr-2" />
-							<span>{title}</span>
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
-	{/if}
+	<!-- {#if shouldAnimate} -->
+	<nav
+		class={`fixed bottom-0 left-0 top-0 w-[300px] transition-all duration-300 ease-linear ${
+			showMobileNavigation ? 'translate-x-full' : '-translate-x-full'
+		}`}
+	>
+		<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
+			{#each SECTION as item, idx}
+				{@const { title, icon, id } = item}
+				<li transition:fly={{ x: -100, duration: 300 * idx }}>
+					<a
+						data-is-visible={visibleSectionId === id}
+						class="flex h-14 w-14 items-center rounded-full pl-3 text-base duration-300 hover:pr-3"
+						href={`#${id}`}
+						on:click|preventDefault={() => scrollToSection(id)}
+					>
+						<iconify-icon {icon} height="30px" class="pr-2" />
+						<span>{title}</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</nav>
+	<!-- {/if} -->
 </header>

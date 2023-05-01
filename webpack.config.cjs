@@ -53,6 +53,7 @@ module.exports = {
 					hot: IS_DEV,
 					css: css => css.write('bundle.css'),
 					preprocess: require('svelte-preprocess')({
+						sourceMap: true,
 						babel: true,
 						scss: { prependData: '@import "src/styles/variables";' },
 						postcss: { plugins: [require('autoprefixer')] }
