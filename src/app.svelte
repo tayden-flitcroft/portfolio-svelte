@@ -20,24 +20,7 @@
 		padding: 0 20px 0 150px;
 	}
 
-	// header {
-	// 	grid-area: header;
-	// }
-	// main {
-	// 	grid-area: main;
-	// }
-	// footer {
-	// 	grid-area: footer;
-	// }
-
 	@media screen and (max-width: $small) {
-		// body {
-		// 	grid-template-areas:
-		// 		'header'
-		// 		'main'
-		// 		'footer';
-		// }
-
 		main {
 			padding: 0 10px;
 		}
@@ -134,7 +117,7 @@
 		bind:visibleSectionId
 		sectionData={sectionDataObj[SECTION_TITLE.CONTACT]}
 	>
-		<Contact sectionData={sectionDataObj[SECTION_TITLE.CONTACT]} />
+		<Contact />
 	</SectionWrapper>
 </main>
 <Footer />
