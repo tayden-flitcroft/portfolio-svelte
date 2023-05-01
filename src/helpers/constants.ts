@@ -72,5 +72,5 @@ export const I_AM_STRINGS = [
 	'Technology Enthusiast.'
 ]
 
-export const MAX_MESSAGE_LENGTH = 1000
+export const MAX_MESSAGE_LENGTH = 500
 export const MAX_SUBJECT_LENGTH = 100

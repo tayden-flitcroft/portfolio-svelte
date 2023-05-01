@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MAX_MESSAGE_LENGTH } from '../../helpers/constants'
 	import Input from '../shared/input.svelte'
+	import 'iconify-icon'
 
 	// default state for error is true to prevent submitting empty form
 	let firstNameHasError: boolean = true
@@ -31,8 +32,30 @@
 	}
 </script>
 
-<div class="flex justify-evenly gap-3 sm:flex-col">
-	<div class="border border-black"> tayden </div>
+<div class="flex justify-between gap-3 sm:flex-col">
+	<div class="flex flex-col">
+		<button>
+			<iconify-icon
+				icon="material-symbols:location-on-outline"
+				height="25"
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+			/>
+		</button>
+		<button class="my-11">
+			<iconify-icon
+				icon="mdi:email-outline"
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+				height="25"
+			/>
+		</button>
+		<button>
+			<iconify-icon
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+				icon="material-symbols:phone-android-outline-rounded"
+				height="25"
+			/>
+		</button>
+	</div>
 	<form
 		class="flex w-full max-w-2xl flex-col gap-4 sm:max-w-full"
 		on:submit|preventDefault={submitContactForm}
@@ -69,7 +92,7 @@
 		>
 		<div class="text-right">
 			<button
-				class="raleway rounded-lg bg-[$complementary] p-2 text-white hover:opacity-90"
+				class="raleway rounded-lg bg-[$complementary] p-2 text-white transition duration-300 ease-in-out hover:opacity-70"
 				type="submit"
 			>
 				Send Message
