@@ -55,7 +55,7 @@
 								{icon}
 								alt={title}
 								height="25px"
-								class="text-[$grey] hover:text-[$complementary]"
+								class="text-[$grey] transition duration-300 ease-in-out hover:text-[$complementary]"
 							/>
 						</a>
 					</li>

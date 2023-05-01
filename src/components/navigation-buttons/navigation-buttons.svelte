@@ -109,7 +109,7 @@
 
 	{#if visibleSectionId && visibleSectionId !== homeId}
 		<button
-			class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white hover:opacity-80"
+			class="fixed bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white transition duration-300 ease-in-out hover:opacity-80"
 			on:click|preventDefault={() => {
 				scrollToSection(homeId)
 			}}
@@ -126,7 +126,7 @@
 					<li transition:fly={{ x: -100, duration: 300 * idx }}>
 						<a
 							data-is-visible={visibleSectionId === id}
-							class="flex h-14 w-14 items-center rounded-full pl-3 text-base hover:pr-3"
+							class="flex h-14 w-14 items-center rounded-full pl-3 text-base duration-300 hover:pr-3"
 							href={`#${id}`}
 							on:click|preventDefault={() => scrollToSection(id)}
 						>

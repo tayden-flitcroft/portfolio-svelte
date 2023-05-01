@@ -34,7 +34,7 @@
 			{@const { icon, href, title } = item}
 			<li>
 				<a
-					class="flex h-10 w-10 items-center justify-center rounded-full bg-[$secondary] text-white hover:opacity-80"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-[$secondary] text-white transition duration-300 ease-in-out hover:opacity-80"
 					rel="noreferrer"
 					{href}
 					target="_blank"
