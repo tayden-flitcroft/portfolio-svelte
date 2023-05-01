@@ -1,5 +1,3 @@
-import type { SectionData, SocialMedia } from '../global'
-
 export enum SECTION_TITLE {
     ABOUT = 'About',
     HOME = 'Home',

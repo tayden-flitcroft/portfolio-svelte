@@ -40,21 +40,24 @@
 				height="25"
 				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
 			/>
+			Location: San Antonio, Texas
 		</button>
-		<button class="my-11">
+		<a class="my-11" href="mailto:contact@taydenflitcroft.com">
 			<iconify-icon
 				icon="mdi:email-outline"
 				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
 				height="25"
 			/>
-		</button>
-		<button>
+			Email: contact@taydenflitcroft.com
+		</a>
+		<a href="tel:503-569-7894">
 			<iconify-icon
 				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
 				icon="material-symbols:phone-android-outline-rounded"
 				height="25"
 			/>
-		</button>
+			Call: +1 (503) 569-7894
+		</a>
 	</div>
 	<form
 		class="flex w-full max-w-2xl flex-col gap-4 sm:max-w-full"

@@ -1,23 +1,31 @@
-import type { SECTION_TITLE } from './helpers/constants'
+enum SECTION_TITLE {
+    ABOUT = 'About',
+    HOME = 'Home',
+    RESUME = 'Resume',
+    PROJECTS = 'Projects',
+    CONTACT = 'Contact'
+}
 
-export interface SocialMedia {
+declare interface SocialMedia {
     href: string
     icon: string
     title: string
 }
 
-export interface SectionData {
+declare interface SectionData {
     icon: string
     id: string
     title: SECTION_TITLE
 }
 
-export interface LabelProps {
+declare interface LabelProps {
     class?: string
 }
 
-export interface InputProps {
+declare interface InputProps {
     class?: string
     type?: string
     autocomplete?: string
 }
+
+declare module 'svelte-hamburgers'

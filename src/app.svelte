@@ -2,6 +2,7 @@
 	.mobile-navigation-open {
 		overflow: hidden;
 	}
+
 	body {
 		display: flex;
 		flex-direction: column;
@@ -36,7 +37,6 @@
 	import Contact from './components/contact/contact.svelte'
 	import Loader from './components/loader/loader.svelte'
 	import { SECTION, SECTION_TITLE } from './helpers/constants'
-	import type { SectionData } from './global'
 	import Footer from './components/footer/footer.svelte'
 	import SectionWrapper from './components/section-wrapper/section-wrapper.svelte'
 	import { onMount } from 'svelte'
