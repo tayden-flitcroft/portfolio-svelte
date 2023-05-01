@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { LabelProps, InputProps } from '../../global'
 	import validator from '../../helpers/validator'
 	import 'iconify-icon'
 

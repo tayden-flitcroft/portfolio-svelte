@@ -9,7 +9,6 @@
 	import Typed from 'typed.js'
 	import 'iconify-icon'
 	import { SOCIAL_MEDIA, I_AM_STRINGS } from '../../helpers/constants'
-	import type { SectionData } from '../../global'
 	import { fly, scale, slide } from 'svelte/transition'
 
 	export let sectionData: SectionData

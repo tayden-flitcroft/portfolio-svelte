@@ -25,7 +25,6 @@
 </style>
 
 <script lang="ts">
-	import type { SectionData } from '../../global'
 	import { fly } from 'svelte/transition'
 
 	export let sectionData: SectionData
