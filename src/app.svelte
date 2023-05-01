@@ -9,7 +9,7 @@
 	}
 
 	section {
-		min-height: 100vh;
+		// min-height: 100vh;
 	}
 
 	a {
@@ -19,6 +19,10 @@
 
 	main {
 		padding: 0 20px 0 150px;
+
+		& > :nth-child(1n) {
+			padding: 20px 0;
+		}
 	}
 
 	@media screen and (max-width: $small) {
@@ -43,6 +47,8 @@
 
 	export let showLoader = false
 
+	let visibleSectionId: string | null = null
+
 	const sectionDataObj = SECTION.reduce(
 		(
 			acc: { [key: string]: SectionData },
@@ -53,8 +59,6 @@
 		},
 		{}
 	)
-
-	let visibleSectionId: string | null = null
 
 	const isSectionVisible = (id: string): boolean => {
 		const el = document.getElementById(id)

@@ -41,15 +41,15 @@
 </script>
 
 <section {id} class="pr-3 sm:pr-0">
-	{#if shouldAnimateSection}
-		<div transition:fly={{ y: 100, duration: 1000 }}>
-			<div class="text-center">
-				<h2 class="relative mb-5 pb-5 uppercase text-[$main]">{title}</h2>
-				{#if subheader}
-					<div>{subheader}</div>
-				{/if}
-			</div>
-			<slot />
+	<!-- {#if shouldAnimateSection} -->
+	<div transition:fly={{ y: 100, duration: 1000 }}>
+		<div class="text-center">
+			<h2 class="relative mb-5 pb-5 uppercase text-[$main]">{title}</h2>
+			{#if subheader}
+				<div>{subheader}</div>
+			{/if}
 		</div>
-	{/if}
+		<slot />
+	</div>
+	<!-- {/if} -->
 </section>

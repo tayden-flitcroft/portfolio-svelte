@@ -34,7 +34,7 @@
 	}
 </script>
 
-<section {id} class="flex flex-col justify-center">
+<section {id} class="flex h-screen flex-col justify-center">
 	{#if shouldAnimate}
 		<div
 			class="flex flex-col justify-center gap-4 sm:items-center sm:text-center"
