@@ -32,31 +32,41 @@
 	}
 </script>
 
-<div class="flex justify-between gap-3 sm:flex-col">
-	<div class="flex flex-col">
-		<button>
+<div class="flex justify-around gap-3 sm:flex-col sm:gap-10">
+	<div class="flex flex-col sm:w-fit sm:self-start">
+		<a
+			href="https://maps.google.com/?q=San Antonio, Texas"
+			target="_blank"
+			class="open-sans group flex items-center gap-4 text-lg"
+		>
 			<iconify-icon
 				icon="material-symbols:location-on-outline"
 				height="25"
-				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out group-hover:bg-[$main] group-hover:text-white"
 			/>
-			Location: San Antonio, Texas
-		</button>
-		<a class="my-11" href="mailto:contact@taydenflitcroft.com">
+			San Antonio, Texas
+		</a>
+		<a
+			class="open-sans group my-11 flex items-center gap-4 text-lg"
+			href="mailto:contact@taydenflitcroft.com"
+		>
 			<iconify-icon
 				icon="mdi:email-outline"
-				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out group-hover:bg-[$main] group-hover:text-white"
 				height="25"
 			/>
-			Email: contact@taydenflitcroft.com
+			contact@taydenflitcroft.com
 		</a>
-		<a href="tel:503-569-7894">
+		<a
+			href="tel:503-569-7894"
+			class="open-sans group flex items-center gap-4 text-lg"
+		>
 			<iconify-icon
-				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out hover:bg-[$main] hover:text-white"
+				class="rounded-full border border-transparent bg-[$accent] p-3 transition duration-300 ease-in-out group-hover:bg-[$main] group-hover:text-white"
 				icon="material-symbols:phone-android-outline-rounded"
 				height="25"
 			/>
-			Call: +1 (503) 569-7894
+			+1 (503) 569-7894
 		</a>
 	</div>
 	<form
@@ -93,9 +103,9 @@
 			bind:error={messageHasError}
 			showCharacterCount={MAX_MESSAGE_LENGTH}>Message</Input
 		>
-		<div class="text-right">
+		<div class="text-right sm:text-center">
 			<button
-				class="raleway rounded-lg bg-[$complementary] p-2 text-white transition duration-300 ease-in-out hover:opacity-70"
+				class="raleway rounded-lg bg-[$complementary] p-2 text-white transition duration-300 ease-in-out hover:opacity-70 sm:w-full"
 				type="submit"
 			>
 				Send Message
