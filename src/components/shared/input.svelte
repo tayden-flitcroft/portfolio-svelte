@@ -16,6 +16,7 @@
 	export let error: boolean
 	export let showCharacterCount: number | boolean = false
 	export let maxLength: number = Infinity
+	export let value: string
 
 	let errorMessage: string | null
 	let characterCount: number = 0
@@ -69,6 +70,7 @@
 		{#if textArea}
 			<textarea
 				{id}
+				bind:value
 				class={`${inputClassNames} ${'resize-none'}`}
 				maxlength={maxLength}
 				on:blur={validation}
@@ -82,6 +84,7 @@
 			<input
 				{...inputProps}
 				{id}
+				bind:value
 				class={inputClassNames}
 				maxlength={maxLength}
 				on:blur={validation}

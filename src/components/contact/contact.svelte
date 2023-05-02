@@ -10,6 +10,12 @@
 	let emailHasError: boolean = true
 	let messageHasError: boolean = true
 
+	let emailValue: string
+	let firstNameValue: string
+	let lastNameValue: string
+	let messageValue: string
+	let subjectValue: string
+
 	const formHasError = (): boolean => {
 		return !!(
 			firstNameHasError ||
@@ -22,11 +28,35 @@
 
 	const submitContactForm = async () => {
 		if (!formHasError()) {
-			fetch('/test', {
+			const oauthRes = await fetch(process.env.OAUTH_TOKEN_URL as string, {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify({
+					audience: 'https://api.taydenflitcroft.com',
+					client_id: process.env.CLIENT_ID as string,
+					client_secret: process.env.CLIENT_SECRET as string,
+					grant_type: 'client_credentials'
+				})
+			})
+			const { access_token: accessToken } = await oauthRes.json()
+
+			fetch('https://api.taydenflitcroft.com/portfolio/contact', {
+				// TODO: Update endpoint
 				method: 'POST',
 				body: JSON.stringify({
-					test: 'test'
-				})
+					emailMessage: messageValue,
+					returnEmail: emailValue,
+					senderName: `${firstNameValue} ${lastNameValue}`,
+					sendConfirmationEmail: true,
+					emailSubject: subjectValue
+				}),
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					Authorization: `Bearer ${accessToken}`
+				}
 			})
 		}
 	}
@@ -75,34 +105,42 @@
 	>
 		<div class="flex w-full gap-5 sm:flex-col">
 			<Input
+				bind:error={firstNameHasError}
+				bind:value={firstNameValue}
 				id="first-name"
 				inputProps={{ autocomplete: 'given-name' }}
-				bind:error={firstNameHasError}
 			>
 				First Name
 			</Input>
 			<Input
+				bind:error={lastNameHasError}
+				bind:value={lastNameValue}
 				id="last-name"
 				inputProps={{ autocomplete: 'family-name ' }}
-				bind:error={lastNameHasError}
 			>
 				Last Name
 			</Input>
 		</div>
 		<Input
+			bind:error={emailHasError}
+			bind:value={emailValue}
 			id="email"
 			inputProps={{ autocomplete: 'email' }}
-			bind:error={emailHasError}
 		>
 			Email Address
 		</Input>
-		<Input id="subject" bind:error={subjectHasError}>Subject</Input>
+		<Input id="subject" bind:value={subjectValue} bind:error={subjectHasError}>
+			Subject
+		</Input>
 		<Input
-			id="message"
-			textArea
 			bind:error={messageHasError}
-			showCharacterCount={MAX_MESSAGE_LENGTH}>Message</Input
+			bind:value={messageValue}
+			id="message"
+			showCharacterCount={MAX_MESSAGE_LENGTH}
+			textArea
 		>
+			Message
+		</Input>
 		<div class="text-right sm:text-center">
 			<button
 				class="raleway rounded-lg bg-[$complementary] p-2 text-white transition duration-300 ease-in-out hover:opacity-70 sm:w-full"
