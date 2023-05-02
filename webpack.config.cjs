@@ -2,6 +2,7 @@ const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const WebpackCopyPlugin = require('copy-webpack-plugin')
 const mockRoutes = require('./mock-routes.cjs')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
@@ -10,6 +11,7 @@ module.exports = {
 	mode: IS_DEV ? 'development' : 'production',
 	entry: './src/index.ts',
 	output: {
+		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/[name].min.js'
 	},
@@ -32,6 +34,11 @@ module.exports = {
 			minify: {
 				collapseWhitespace: !IS_DEV
 			}
+		}),
+		new WebpackCopyPlugin({
+			patterns: [
+				{ from: 'assets', to: 'assets' }
+			]
 		}),
 		new Dotenv()
 	],

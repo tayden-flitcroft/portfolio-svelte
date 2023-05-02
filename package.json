@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "webpack",
+    "build": "rimraf dist && webpack",
     "start:dev": "NODE_ENV=development webpack-dev-server"
   },
   "author": "Tayden Flitcroft",
@@ -18,6 +18,7 @@
     "@typescript-eslint/parser": "^5.59.1",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.39.0",
@@ -29,6 +30,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.2.7",
+    "rimraf": "^5.0.0",
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
