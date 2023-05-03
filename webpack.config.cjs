@@ -6,9 +6,10 @@ const WebpackCopyPlugin = require('copy-webpack-plugin')
 const mockRoutes = require('./mock-routes.cjs')
 
 const IS_DEV = process.env.NODE_ENV === 'development'
+const mode = IS_DEV ? 'development' : 'production'
 
 module.exports = {
-	mode: IS_DEV ? 'development' : 'production',
+	mode,
 	entry: './src/index.ts',
 	output: {
 		publicPath: '/',
@@ -40,7 +41,10 @@ module.exports = {
 				{ from: 'assets', to: 'assets' }
 			]
 		}),
-		new Dotenv()
+		new Dotenv({
+			path: `.env.${mode}`,
+			allowEmptyValues: true
+		})
 	],
 	module: {
 		rules: [

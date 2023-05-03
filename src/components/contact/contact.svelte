@@ -2,6 +2,7 @@
 	import { MAX_MESSAGE_LENGTH } from '../../helpers/constants'
 	import Input from '../shared/input.svelte'
 	import 'iconify-icon'
+	import getBaseUrl from '../../helpers/get-base-url'
 
 	// default state for error is true to prevent submitting empty form
 	let firstNameHasError: boolean = true
@@ -42,8 +43,7 @@
 			})
 			const { access_token: accessToken } = await oauthRes.json()
 
-			fetch('https://api.taydenflitcroft.com/portfolio/contact', {
-				// TODO: Update endpoint
+			fetch(`${getBaseUrl()}/portfolio/contact`, {
 				method: 'POST',
 				body: JSON.stringify({
 					emailMessage: messageValue,
