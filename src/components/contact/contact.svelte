@@ -98,6 +98,14 @@
 		formSubmissionState === FormSubmissionState.ERROR ||
 		formSubmissionState === FormSubmissionState.SUCCESS
 	) {
+		if (formSubmissionState === FormSubmissionState.SUCCESS) {
+			// Reset form on success scenario
+			emailValue = ''
+			firstNameValue = ''
+			lastNameValue = ''
+			messageValue = ''
+			subjectValue = ''
+		}
 		setTimeout(() => {
 			formSubmissionState = FormSubmissionState.INITIAL
 		}, 5000)
