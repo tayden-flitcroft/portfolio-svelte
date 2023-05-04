@@ -13,12 +13,11 @@
 	export let textArea: boolean = false
 	export let labelProps: LabelProps = {}
 	export let inputProps: InputProps = {}
-	export let error: boolean
+	export let errorMessage: string | null
 	export let showCharacterCount: number | boolean = false
 	export let maxLength: number = Infinity
 	export let value: string
 
-	let errorMessage: string | null
 	let characterCount: number = 0
 
 	let labelClassNames: string
@@ -31,14 +30,12 @@
 
 	const validation = (e: any): void => {
 		errorMessage = validator(e.target.id, e.target.value)
-		error = !!errorMessage
 	}
 
 	const handleInput = (e: any): void => {
 		characterCount = e.target.value.length
-		if (error && !validator(e.target.id, e.target.value)) {
+		if (!!errorMessage && !validator(e.target.id, e.target.value)) {
 			errorMessage = null
-			error = false
 		}
 	}
 
@@ -71,7 +68,7 @@
 			<textarea
 				{id}
 				bind:value
-				class={`${inputClassNames} ${'resize-none'}`}
+				class={`${inputClassNames} resize-none`}
 				maxlength={maxLength}
 				on:blur={validation}
 				on:input={e => {
@@ -113,8 +110,10 @@
 								: 'text-yellow-500'
 							: ''
 						: ''
-				}`}>{characterCount}</span
+				}`}
 			>
+				{characterCount}
+			</span>
 			{#if typeof showCharacterCount === 'number'}
 				<span>/ {showCharacterCount}</span>
 			{/if}

@@ -3,6 +3,7 @@
 	import Input from '../shared/input.svelte'
 	import 'iconify-icon'
 	import getBaseUrl from '../../helpers/get-base-url'
+	import validator from '../../helpers/validator'
 
 	enum FormSubmissionState {
 		'ERROR',
@@ -14,31 +15,65 @@
 	let formSubmissionState: FormSubmissionState = FormSubmissionState.INITIAL
 	let formHasBeenSubmitted: boolean = false
 
-	// default state for error is true to prevent submitting empty form
-	let firstNameHasError: boolean = true
-	let lastNameHasError: boolean = true
-	let subjectHasError: boolean = true
-	let emailHasError: boolean = true
-	let messageHasError: boolean = true
+	let emailErrorMessage: string
+	let firstNameErrorMessage: string
+	let lastNameErrorMessage: string
+	let messageErrorMessage: string
+	let subjectErrorMessage: string
 
-	let emailValue: string
-	let firstNameValue: string
-	let lastNameValue: string
-	let messageValue: string
-	let subjectValue: string
+	let emailValue: string = ''
+	let firstNameValue: string = ''
+	let lastNameValue: string = ''
+	let messageValue: string = ''
+	let subjectValue: string = ''
 
-	const formHasError = (): boolean => {
+	const scrollToFirstError = (): void => {
+		const inputs = [
+			{ id: 'first-name', error: firstNameErrorMessage },
+			{ id: 'last-name', error: lastNameErrorMessage },
+			{ id: 'email', error: emailErrorMessage },
+			{ id: 'subject', error: subjectErrorMessage },
+			{ id: 'message', error: messageErrorMessage }
+		]
+
+		const idx = inputs.findIndex(
+			(item: { id: string; error: string }) => !!item.error
+		)
+
+		if (idx > -1) {
+			const { id } = inputs[idx]
+
+			const element = document.getElementById(id) as HTMLElement
+
+			element?.scrollIntoView({
+				behavior: 'smooth',
+				inline: 'center',
+				block: 'center'
+			})
+			element?.focus()
+		}
+	}
+
+	const validate = (): boolean => {
+		emailErrorMessage = validator('email', emailValue)
+		firstNameErrorMessage = validator('first-name', firstNameValue)
+		lastNameErrorMessage = validator('last-name', lastNameValue)
+		messageErrorMessage = validator('message', messageValue)
+		subjectErrorMessage = validator('subject', subjectValue)
+
+		scrollToFirstError()
+
 		return !!(
-			firstNameHasError ||
-			lastNameHasError ||
-			subjectHasError ||
-			emailHasError ||
-			messageHasError
+			emailErrorMessage ||
+			firstNameErrorMessage ||
+			lastNameErrorMessage ||
+			messageErrorMessage ||
+			subjectErrorMessage
 		)
 	}
 
 	const submitContactForm = async (): Promise<void> => {
-		if (!formHasError()) {
+		if (!validate()) {
 			formSubmissionState = FormSubmissionState.SUBMITTING
 
 			const oauthRes = await fetch(process.env.OAUTH_TOKEN_URL as string, {
@@ -79,7 +114,7 @@
 
 					if (res.ok) {
 						formSubmissionState = FormSubmissionState.SUCCESS
-						formHasBeenSubmitted = true
+						formHasBeenSubmitted
 					} else {
 						formSubmissionState = FormSubmissionState.ERROR
 					}
@@ -155,7 +190,7 @@
 	>
 		<div class="flex w-full gap-5 sm:flex-col">
 			<Input
-				bind:error={firstNameHasError}
+				bind:errorMessage={firstNameErrorMessage}
 				bind:value={firstNameValue}
 				id="first-name"
 				inputProps={{ autocomplete: 'given-name' }}
@@ -163,7 +198,7 @@
 				First Name
 			</Input>
 			<Input
-				bind:error={lastNameHasError}
+				bind:errorMessage={lastNameErrorMessage}
 				bind:value={lastNameValue}
 				id="last-name"
 				inputProps={{ autocomplete: 'family-name ' }}
@@ -172,18 +207,22 @@
 			</Input>
 		</div>
 		<Input
-			bind:error={emailHasError}
+			bind:errorMessage={emailErrorMessage}
 			bind:value={emailValue}
 			id="email"
 			inputProps={{ autocomplete: 'email' }}
 		>
 			Email Address
 		</Input>
-		<Input id="subject" bind:value={subjectValue} bind:error={subjectHasError}>
+		<Input
+			id="subject"
+			bind:value={subjectValue}
+			bind:errorMessage={subjectErrorMessage}
+		>
 			Subject
 		</Input>
 		<Input
-			bind:error={messageHasError}
+			bind:errorMessage={messageErrorMessage}
 			bind:value={messageValue}
 			id="message"
 			showCharacterCount={MAX_MESSAGE_LENGTH}
@@ -196,14 +235,14 @@
 		<div class="flex justify-end">
 			{#if formSubmissionState === FormSubmissionState.SUBMITTING}
 				<button
-					class="my-4 flex h-10 min-w-[220px] cursor-progress items-center justify-center rounded-lg bg-[$grey] text-white sm:w-full"
+					class="raleway my-4 flex h-10 min-w-[220px] cursor-progress items-center justify-center rounded-lg bg-[$grey] text-white sm:w-full"
 					disabled
 				>
 					<div class="roll-up"> Sending... </div>
 				</button>
 			{:else if formSubmissionState === FormSubmissionState.SUCCESS}
 				<button
-					class="my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-[$main] text-white sm:w-full"
+					class="raleway my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-[$main] text-white sm:w-full"
 				>
 					<div class="roll-down flex items-center justify-center">
 						<span class="pr-2"> Successfully Sent </span>
@@ -212,7 +251,7 @@
 				</button>
 			{:else if formSubmissionState === FormSubmissionState.ERROR}
 				<button
-					class="my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-red-500 text-white sm:w-full"
+					class="raleway my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-red-500 text-white sm:w-full"
 				>
 					<div class="roll-down flex items-center justify-center">
 						<span class="pr-2"> Error Occurred. Try Again. </span>
@@ -221,7 +260,7 @@
 				</button>
 			{:else}
 				<button
-					class="my-4 flex h-10 min-w-[220px] items-center justify-center rounded-lg bg-[$complementary] text-white transition duration-300 ease-in-out hover:opacity-80 sm:w-full"
+					class="raleway my-4 flex h-10 min-w-[220px] items-center justify-center rounded-lg bg-[$complementary] text-white transition duration-300 ease-in-out hover:opacity-80 sm:w-full"
 					type="submit"
 				>
 					<span class={formHasBeenSubmitted ? 'roll-down' : ''}>
