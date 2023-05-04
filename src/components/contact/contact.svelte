@@ -4,6 +4,16 @@
 	import 'iconify-icon'
 	import getBaseUrl from '../../helpers/get-base-url'
 
+	enum FormSubmissionState {
+		'ERROR',
+		'INITIAL',
+		'SUBMITTING',
+		'SUCCESS'
+	}
+
+	let formSubmissionState: FormSubmissionState = FormSubmissionState.INITIAL
+	let formHasBeenSubmitted: boolean = false
+
 	// default state for error is true to prevent submitting empty form
 	let firstNameHasError: boolean = true
 	let lastNameHasError: boolean = true
@@ -27,38 +37,70 @@
 		)
 	}
 
-	const submitContactForm = async () => {
+	const submitContactForm = async (): Promise<void> => {
 		if (!formHasError()) {
+			formSubmissionState = FormSubmissionState.SUBMITTING
+
 			const oauthRes = await fetch(process.env.OAUTH_TOKEN_URL as string, {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json'
 				},
 				body: JSON.stringify({
-					audience: 'https://api.taydenflitcroft.com',
+					audience: process.env.API_URL as string,
 					client_id: process.env.CLIENT_ID as string,
 					client_secret: process.env.CLIENT_SECRET as string,
 					grant_type: 'client_credentials'
 				})
+			}).catch((err: any) => {
+				console.error(err)
+				formSubmissionState = FormSubmissionState.ERROR
 			})
-			const { access_token: accessToken } = await oauthRes.json()
 
-			fetch(`${getBaseUrl()}/portfolio/contact`, {
-				method: 'POST',
-				body: JSON.stringify({
-					emailMessage: messageValue,
-					returnEmail: emailValue,
-					senderName: `${firstNameValue} ${lastNameValue}`,
-					sendConfirmationEmail: true,
-					emailSubject: subjectValue
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json',
-					Authorization: `Bearer ${accessToken}`
+			if (oauthRes?.ok) {
+				try {
+					const { access_token: accessToken } = await oauthRes.json()
+
+					const res = await fetch(`${getBaseUrl()}/portfolio/contact`, {
+						method: 'POST',
+						body: JSON.stringify({
+							emailMessage: messageValue,
+							returnEmail: emailValue,
+							senderName: `${firstNameValue} ${lastNameValue}`,
+							sendConfirmationEmail: true,
+							emailSubject: subjectValue
+						}),
+						headers: {
+							'Content-Type': 'application/json',
+							Accept: 'application/json',
+							Authorization: `Bearer ${accessToken}`
+						}
+					})
+
+					if (res.ok) {
+						formSubmissionState = FormSubmissionState.SUCCESS
+						formHasBeenSubmitted = true
+					} else {
+						formSubmissionState = FormSubmissionState.ERROR
+					}
+				} catch (err: any) {
+					console.error(err)
+					formSubmissionState = FormSubmissionState.ERROR
 				}
-			})
+			} else {
+				formSubmissionState = FormSubmissionState.ERROR
+				return
+			}
 		}
+	}
+
+	$: if (
+		formSubmissionState === FormSubmissionState.ERROR ||
+		formSubmissionState === FormSubmissionState.SUCCESS
+	) {
+		setTimeout(() => {
+			formSubmissionState = FormSubmissionState.INITIAL
+		}, 5000)
 	}
 </script>
 
@@ -141,13 +183,44 @@
 		>
 			Message
 		</Input>
-		<div class="text-right sm:text-center">
-			<button
-				class="raleway rounded-lg bg-[$complementary] p-2 text-white transition duration-300 ease-in-out hover:opacity-70 sm:w-full"
-				type="submit"
-			>
-				Send Message
-			</button>
+
+		<!-- Submit Button -->
+		<div class="flex justify-end">
+			{#if formSubmissionState === FormSubmissionState.SUBMITTING}
+				<button
+					class="my-4 flex h-10 min-w-[220px] cursor-progress items-center justify-center rounded-lg bg-[$grey] text-white sm:w-full"
+					disabled
+				>
+					<div class="roll-up"> Sending... </div>
+				</button>
+			{:else if formSubmissionState === FormSubmissionState.SUCCESS}
+				<button
+					class="my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-[$main] text-white sm:w-full"
+				>
+					<div class="roll-down flex items-center justify-center">
+						<span class="pr-2"> Successfully Sent </span>
+						<iconify-icon icon="eva:checkmark-fill" width="20" />
+					</div>
+				</button>
+			{:else if formSubmissionState === FormSubmissionState.ERROR}
+				<button
+					class="my-4 flex h-10 min-w-[220px] cursor-not-allowed items-center justify-center rounded-lg bg-red-500 text-white sm:w-full"
+				>
+					<div class="roll-down flex items-center justify-center">
+						<span class="pr-2"> Error Occurred. Try Again. </span>
+						<iconfiy-icon icon="akar-icons:circle-x-fill" width="20" />
+					</div>
+				</button>
+			{:else}
+				<button
+					class="my-4 flex h-10 min-w-[220px] items-center justify-center rounded-lg bg-[$complementary] text-white transition duration-300 ease-in-out hover:opacity-80 sm:w-full"
+					type="submit"
+				>
+					<span class={formHasBeenSubmitted ? 'roll-down' : ''}>
+						Send Message
+					</span>
+				</button>
+			{/if}
 		</div>
 	</form>
 </div>
