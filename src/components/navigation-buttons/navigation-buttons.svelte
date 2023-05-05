@@ -1,57 +1,3 @@
-<style lang="scss">
-	a {
-		background: $secondary;
-		color: $grey;
-		transition: 0.3s;
-		overflow: hidden;
-
-		&[data-is-visible='true'] {
-			background: $complementary;
-			color: #fff;
-		}
-
-		&:hover {
-			background-color: $complementary;
-			color: #fff;
-			width: 100%;
-
-			span {
-				display: block;
-			}
-		}
-
-		span {
-			font-family: 'Open Sans';
-			display: none;
-		}
-	}
-
-	@media screen and (max-width: $small) {
-		nav {
-			left: -300px;
-			position: fixed;
-			z-index: 999;
-
-			ul {
-				background-color: white;
-				border-right: 1px solid lightgray;
-				max-width: 300px;
-				padding-right: 16px;
-				width: calc(100vw / 1.5);
-
-				a {
-					width: 100%;
-					overflow: visible;
-					padding-right: 12px;
-					span {
-						display: block;
-					}
-				}
-			}
-		}
-	}
-</style>
-
 <script lang="ts">
 	import 'iconify-icon'
 	import { SECTION, SECTION_TITLE } from '../../helpers/constants'
@@ -61,7 +7,7 @@
 
 	export let visibleSectionId: string | null
 
-	let hasMobileNavigation: boolean = false
+	let hasMobileNavigation: boolean = window.innerWidth < 993
 	let showMobileNavigation: boolean = false
 	let shouldAnimate: boolean = false
 
@@ -119,7 +65,7 @@
 	{/if}
 	{#if shouldAnimate}
 		<nav
-			class={`fixed bottom-0 left-0 top-0 transition-all duration-300 ease-linear sm:w-[300px] ${
+			class={`fixed bottom-0 left-0 top-0 z-[999] transition-all duration-300 ease-linear sm:-left-[300px] sm:w-[300px] ${
 				hasMobileNavigation
 					? showMobileNavigation
 						? 'translate-x-full'
@@ -127,18 +73,22 @@
 					: ''
 			}`}
 		>
-			<ul class="fixed flex h-screen flex-col justify-center gap-7 pl-4">
+			<ul
+				class="fixed flex h-screen flex-col justify-center gap-7 pl-4 sm:w-[calc(100vw/1.5)] sm:max-w-[300px] sm:border-r sm:border-gray-400 sm:bg-white sm:pr-4"
+			>
 				{#each SECTION as item, idx}
 					{@const { title, icon, id } = item}
 					<li transition:fly={{ x: -100, duration: 300 * idx }}>
 						<a
 							data-is-visible={visibleSectionId === id}
-							class="flex h-14 w-14 items-center rounded-full pl-3 text-base duration-300 hover:pr-3"
+							class="group flex h-14 w-14 items-center gap-3 overflow-hidden rounded-full bg-[$secondary] pl-[13px] text-base text-[$grey] duration-300 hover:w-full hover:bg-[$complementary] hover:pr-4 hover:text-white data-[is-visible=true]:bg-[$complementary] data-[is-visible=true]:text-white sm:visible sm:w-full"
 							href={`#${id}`}
 							on:click|preventDefault={() => scrollToSection(id)}
 						>
-							<iconify-icon {icon} height="30px" class="pr-2" />
-							<span>{title}</span>
+							<iconify-icon {icon} height="30px" />
+							<span class="open-sans hidden group-hover:block sm:block"
+								>{title}</span
+							>
 						</a>
 					</li>
 				{/each}

@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const WebpackCopyPlugin = require('copy-webpack-plugin')
 const mockRoutes = require('./mock-routes.cjs')
+const CompressionPlugin = require('compression-webpack-plugin')
+
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 const mode = IS_DEV ? 'development' : 'production'
@@ -44,7 +46,8 @@ module.exports = {
 		new Dotenv({
 			path: `.env.${mode}`,
 			allowEmptyValues: true
-		})
+		}),
+		new CompressionPlugin()
 	],
 	module: {
 		rules: [

@@ -1,9 +1,3 @@
-<style lang="scss">
-	.typed-wrapper {
-		font-family: Poppins;
-	}
-</style>
-
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import Typed from 'typed.js'
@@ -41,7 +35,7 @@
 			transition:slide={{ delay: 150, duration: 900 }}
 		>
 			<h1 class="text-6xl sm:text-4xl">Tayden Flitcroft</h1>
-			<div class="typed-wrapper text-2xl">
+			<div class="typed-wrapper poppins text-2xl">
 				I'm a <span class="text-[$main]" bind:this={typed} />
 			</div>
 
