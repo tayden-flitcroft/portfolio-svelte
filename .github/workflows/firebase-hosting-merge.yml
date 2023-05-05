@@ -10,13 +10,13 @@ jobs:
       - uses: actions/checkout@v3
       - name: create .env file
         run: |
-          touch .env
-          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
-          echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> .env
-          echo OAUTH_TOKEN_URL=${{ secrets.OAUTH_TOKEN_URL }} >> .env
-          echo API_URL=${{ secrets.API_URL }} >> .env
-          echo ANALYTICS_ID=${{ secrets.ANALYTICS_ID }} >> .env
-          echo FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env
+          touch .env.production
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env.production
+          echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> .env.production
+          echo OAUTH_TOKEN_URL=${{ secrets.OAUTH_TOKEN_URL }} >> .env.production
+          echo API_URL=${{ secrets.API_URL }} >> .env.production
+          echo ANALYTICS_ID=${{ secrets.ANALYTICS_ID }} >> .env.production
+          echo FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env.production
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
