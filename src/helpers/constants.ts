@@ -74,5 +74,5 @@ export const MAX_MESSAGE_LENGTH = 500
 export const MAX_SUBJECT_LENGTH = 100
 
 export enum ANALYTICS_EVENT_NAME {
-	'BUTTON_CLICK'
+	CLICK = 'click'
 }

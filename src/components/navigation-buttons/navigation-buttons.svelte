@@ -32,7 +32,7 @@
 	}
 
 	const scrollToSection = (id: string): void => {
-		fireEvent(ANALYTICS_EVENT_NAME.BUTTON_CLICK)
+		fireEvent(ANALYTICS_EVENT_NAME.CLICK)
 		if (showMobileNavigation) {
 			toggleMobileNavigation()
 		}

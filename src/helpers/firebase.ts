@@ -19,5 +19,5 @@ const analytics = getAnalytics(app)
 
 
 export const fireEvent = (eventName: ANALYTICS_EVENT_NAME, data = {}): void => {
-	logEvent(analytics, (eventName as unknown as string), data)
+	logEvent(analytics, eventName , data)
 }
