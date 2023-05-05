@@ -1,11 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAnalytics, logEvent } from 'firebase/analytics'
+import type { ANALYTICS_EVENT_NAME } from './constants'
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
 	apiKey: process.env.FIREBASE_API_KEY,
 	authDomain: 'portfolio-svelte-2198.firebaseapp.com',
@@ -19,3 +16,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 const analytics = getAnalytics(app)
+
+
+export const fireEvent = (eventName: ANALYTICS_EVENT_NAME, data = {}): void => {
+	logEvent(analytics, (eventName as unknown as string), data)
+}

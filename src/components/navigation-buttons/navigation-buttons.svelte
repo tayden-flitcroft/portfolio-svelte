@@ -1,9 +1,14 @@
 <script lang="ts">
 	import 'iconify-icon'
-	import { SECTION, SECTION_TITLE } from '../../helpers/constants'
+	import {
+		ANALYTICS_EVENT_NAME,
+		SECTION,
+		SECTION_TITLE
+	} from '../../helpers/constants'
 	import { fly } from 'svelte/transition'
 	import Hamburger from 'svelte-hamburgers'
 	import { onMount } from 'svelte'
+	import { fireEvent } from '../../helpers/firebase'
 
 	export let visibleSectionId: string | null
 
@@ -27,6 +32,7 @@
 	}
 
 	const scrollToSection = (id: string): void => {
+		fireEvent(ANALYTICS_EVENT_NAME.BUTTON_CLICK)
 		if (showMobileNavigation) {
 			toggleMobileNavigation()
 		}
