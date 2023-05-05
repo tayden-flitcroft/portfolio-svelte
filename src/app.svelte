@@ -45,7 +45,7 @@
 	import SectionWrapper from './components/section-wrapper/section-wrapper.svelte'
 	import { onMount } from 'svelte'
 
-	export let showLoader = false
+	export let showLoader = true
 
 	let visibleSectionId: string | null = null
 
