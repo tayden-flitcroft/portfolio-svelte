@@ -1,0 +1,23 @@
+name: Deploy to Firebase Hosting on PR
+'on': pull_request
+jobs:
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - name: create .env file
+        run: |
+          touch .env
+          echo CLIENT_ID=${{ secrets.CLIENT_ID }} >> .env
+          echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> .env
+          echo OAUTH_TOKEN_URL=${{ secrets.OAUTH_TOKEN_URL }} >> .env
+          echo API_URL=${{ secrets.API_URL }} >> .env
+          echo ANALYTICS_ID=${{ secrets.ANALYTICS_ID }} >> .env
+          echo FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env
+      - uses: actions/checkout@v3
+      - run: npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_SVELTE_2198 }}'
+          projectId: portfolio-svelte-2198

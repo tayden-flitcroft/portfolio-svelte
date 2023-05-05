@@ -25,6 +25,7 @@
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.39.0",
     "eslint-plugin-svelte3": "^4.0.0",
+    "firebase": "^9.21.0",
     "html-webpack-plugin": "^5.5.1",
     "iconify-icon": "^1.0.7",
     "postcss": "^8.4.23",
