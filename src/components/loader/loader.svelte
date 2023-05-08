@@ -1,19 +1,21 @@
-<style lang="scss">
+<style global lang="scss">
 	.four-dots {
 		&:before {
-			animation: spin 1s infinite;
 			box-shadow: 20px 0 0 5px $main, 0 20px 0 5px $complementary,
 				0 (20px * -1) 0 5px $complementary, -(20px) 0 0 5px $main;
 		}
 	}
 
-	@keyframes spin {
-		to {
-			transform: rotate(360deg);
-		}
+	body {
+		cursor: progress;
 	}
 </style>
 
-<div
-	class="four-dots before:content=[''] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 before:block before:h-[5px] before:w-[5px] before:rounded-full"
-/>
+<div class="">
+	<div
+		class="absolute bottom-0 left-0 right-0 top-0 z-[9998] bg-gray-400 opacity-50 transition-opacity duration-1000 ease-in-out"
+	/>
+	<div
+		class="four-dots before:content=[''] fixed left-1/2 top-1/2 z-[9999] -translate-x-1/2 -translate-y-1/2 before:block before:h-[5px] before:w-[5px] before:animate-spin before:rounded-full"
+	/>
+</div>

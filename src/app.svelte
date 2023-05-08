@@ -8,27 +8,9 @@
 		flex-direction: column;
 	}
 
-	section {
-		// min-height: 100vh;
-	}
-
 	a {
 		color: black;
 		text-decoration: none;
-	}
-
-	main {
-		padding: 0 20px 0 150px;
-
-		& > :nth-child(1n) {
-			padding: 20px 0;
-		}
-	}
-
-	@media screen and (max-width: $small) {
-		main {
-			padding: 0 10px;
-		}
 	}
 </style>
 
@@ -45,8 +27,7 @@
 	import SectionWrapper from './components/section-wrapper/section-wrapper.svelte'
 	import { onMount } from 'svelte'
 
-	export let showLoader = true
-
+	let showLoader = false
 	let visibleSectionId: string | null = null
 
 	const sectionDataObj = SECTION.reduce(
@@ -97,7 +78,9 @@
 {/if}
 
 <NavigationButtons bind:visibleSectionId />
-<main>
+<main
+	class="pl-40 pr-5 sm:px-3 sm:py-0 [&*:nth-child(1n)]:px-0 [&*:nth-child(1n)]:py-5"
+>
 	<Home sectionData={sectionDataObj[SECTION_TITLE.HOME]} />
 	<SectionWrapper
 		bind:visibleSectionId
