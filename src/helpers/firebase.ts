@@ -6,7 +6,7 @@ import { connectStorageEmulator, getStorage } from 'firebase/storage'
 import type { ANALYTICS_EVENT_NAME } from './constants'
 
 const firebaseConfig = {
-	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	apiKey: process.env.VITE_FIREBASE_API_KEY,
 	authDomain: 'portfolio-svelte-2198.firebaseapp.com',
 	databaseURL: 'https://portfolio-svelte-2198.firebaseio.com',
 	projectId: 'portfolio-svelte-2198',
