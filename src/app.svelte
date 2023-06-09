@@ -78,9 +78,7 @@
 {/if}
 
 <NavigationButtons bind:visibleSectionId />
-<main
-	class="pl-40 pr-5 sm:px-3 sm:py-0 [&*:nth-child(1n)]:px-0 [&*:nth-child(1n)]:py-5"
->
+<main class="pl-40 pr-5 sm:px-3 sm:py-0">
 	<Home sectionData={sectionDataObj[SECTION_TITLE.HOME]} />
 	<SectionWrapper
 		bind:visibleSectionId
