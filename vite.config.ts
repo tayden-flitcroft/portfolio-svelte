@@ -18,6 +18,17 @@ interface Mix {
 const mix = (mixPlugin as unknown as Mix).default
 
 export default defineConfig(() => {
+	const plugins = [
+		svelte()
+	]
+
+	if (process.env.NODE_ENV === 'development') {
+		plugins.push(mix({
+			handler: './mock-routes.ts'
+		})
+		)
+	}
+	
 	return {
 		server: {
 			host: 'dev.taydenflitcroft.com',
@@ -25,12 +36,7 @@ export default defineConfig(() => {
 			strictPort: true,
 			open: false
 		},
-		plugins: [
-			mix({
-				handler: './mock-routes.ts'
-			}),
-			svelte()
-		],
+		plugins,
 		css: {
 			postcss: postcssConfig
 		}
