@@ -5,7 +5,7 @@
         "allowImportingTsExtensions": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "module": "es6",
+        "module": "es2022",
         "moduleResolution": "Node",
         "outDir": "./dist",
         "preserveValueImports": false,
@@ -14,6 +14,8 @@
         "strict": true,
         "strictNullChecks": true
     },
-    "include": ["./src/**/*.ts", "./src/**/*.svelte", "*.cjs", "*.mjs"],
-    "exclude": ["node_modules", "dist", "out"]
+    "include": ["./src/**/*.ts", "./src/**/*.svelte", "*.cjs", "*.mjs", "vite.config.ts", "webpack.config.ts", "svelte.config.js", "svelte.config.js", "vite.config.ts", "postcss.config.js", "mock-routes.ts"],
+    "exclude": ["node_modules", "dist", "out"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+
 }

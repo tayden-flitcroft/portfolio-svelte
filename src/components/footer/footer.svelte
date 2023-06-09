@@ -3,11 +3,11 @@
 </script>
 
 <footer
-	class="flex flex-col items-center justify-center gap-5 bg-[$accent] p-8 text-center"
+	class="flex flex-col items-center justify-center gap-5 bg-accent p-8 text-center"
 >
 	<div class="inline-flex w-full items-center justify-center">
-		<hr class="my-8 h-1 w-64 rounded border-0 bg-[$complementary]" />
-		<div class="absolute left-1/2 -translate-x-1/2 bg-[$accent] px-4">
+		<hr class="my-8 h-1 w-64 rounded border-0 bg-complementary" />
+		<div class="absolute left-1/2 -translate-x-1/2 bg-accent px-4">
 			<svg
 				aria-hidden="true"
 				class="h-5 w-5 text-gray-700"
@@ -28,13 +28,13 @@
 		</q>
 		<i class="block font-extrabold sm:text-center"> ~ Martin Fowler ~ </i>
 	</div>
-	<hr class="my-8 h-1 w-64 rounded border-0 bg-[$complementary]" />
+	<hr class="my-8 h-1 w-64 rounded border-0 bg-complementary" />
 	<ul class="mt-5 flex gap-6">
 		{#each SOCIAL_MEDIA as item}
 			{@const { icon, href, title } = item}
 			<li>
 				<a
-					class="flex h-10 w-10 items-center justify-center rounded-full bg-[$secondary] text-white transition duration-300 ease-in-out hover:opacity-80"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-white transition duration-300 ease-in-out hover:opacity-80"
 					rel="noreferrer"
 					{href}
 					target="_blank"

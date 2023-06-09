@@ -52,7 +52,7 @@
 <header>
 	<div
 		class={`hidden sm:fixed sm:right-3 sm:top-3 sm:block ${
-			showMobileNavigation ? 'rounded-full bg-[color:$complementary]' : ''
+			showMobileNavigation ? 'rounded-full bg-complementary' : ''
 		}`}
 	>
 		<Hamburger bind:open={showMobileNavigation} />
@@ -60,7 +60,7 @@
 
 	{#if visibleSectionId && visibleSectionId !== homeId}
 		<button
-			class="fixed bottom-3 right-3 z-[9999] flex h-11 w-11 items-center justify-center rounded-full bg-[color:$main] text-white transition duration-300 ease-in-out hover:opacity-80"
+			class="fixed bottom-3 right-3 z-[9999] flex h-11 w-11 items-center justify-center rounded-full bg-main text-white transition duration-300 ease-in-out hover:opacity-80"
 			on:click|preventDefault={() => {
 				scrollToSection(homeId)
 			}}
@@ -87,7 +87,7 @@
 					<li transition:fly={{ x: -100, duration: 300 * idx }}>
 						<a
 							data-is-visible={visibleSectionId === id}
-							class="group flex h-14 w-14 items-center gap-3 overflow-hidden rounded-full bg-[$secondary] pl-[13px] text-base text-[$grey] duration-300 hover:w-full hover:bg-[$complementary] hover:pr-4 hover:text-white data-[is-visible=true]:bg-[$complementary] data-[is-visible=true]:text-white sm:visible sm:w-full"
+							class="text-primary group flex h-14 w-14 items-center gap-3 overflow-hidden rounded-full bg-secondary pl-[13px] text-base duration-300 hover:w-full hover:bg-complementary hover:pr-4 hover:text-white data-[is-visible=true]:bg-complementary data-[is-visible=true]:text-white sm:visible sm:w-full"
 							href={`#${id}`}
 							on:click|preventDefault={() => scrollToSection(id)}
 						>

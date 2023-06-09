@@ -1,3 +1,5 @@
+import 'vite/client'
+
 enum SECTION_TITLE {
     ABOUT = 'About',
     HOME = 'Home',

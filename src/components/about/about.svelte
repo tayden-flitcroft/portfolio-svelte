@@ -1,8 +1,16 @@
 <script lang="ts">
-	import { SECTION } from '../../helpers/constants'
+	import { onMount } from 'svelte'
+	import { getAboutMeContent } from '../../helpers/firebase'
 	export let sectionData: SectionData
+	import SvelteMarkdown from 'svelte-markdown'
 
-	const { id, title, icon } = sectionData
+	const { id } = sectionData
+
+	let aboutMeContent: string = `# hello`
+
+	// onMount(async () => {
+	// 	aboutMeContent = await getAboutMeContent()
+	// })
 </script>
 
-<section {id}> about </section>
+<section {id}> <SvelteMarkdown source={aboutMeContent} /> </section>

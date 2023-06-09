@@ -36,7 +36,7 @@
 		>
 			<h1 class="text-6xl sm:text-4xl">Tayden Flitcroft</h1>
 			<div class="typed-wrapper poppins text-2xl">
-				I'm a <span class="text-[$main]" bind:this={typed} />
+				I'm a <span class="text-main" bind:this={typed} />
 			</div>
 
 			<ul class="mt-5 flex gap-6">
@@ -48,7 +48,7 @@
 								{icon}
 								alt={title}
 								height="25px"
-								class="text-[$grey] transition duration-300 ease-in-out hover:text-[$complementary]"
+								class="text-grey transition duration-300 ease-in-out hover:text-complementary"
 							/>
 						</a>
 					</li>

@@ -1,8 +1,9 @@
 <style global lang="scss">
 	.four-dots {
 		&:before {
-			box-shadow: 20px 0 0 5px $main, 0 20px 0 5px $complementary,
-				0 (20px * -1) 0 5px $complementary, -(20px) 0 0 5px $main;
+			// need to validate
+			box-shadow: 20px 0 0 5px var(--main), 0 20px 0 5px var(--complementary),
+				0 (20px * -1) 0 5px var(--complementary), -(20px) 0 0 5px var(--main);
 		}
 	}
 
