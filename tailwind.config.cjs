@@ -1,6 +1,5 @@
 module.exports = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
-	purge: ['./index.html','./src/**/*.{svelte,js,ts}'],
+	content: ['./index.html','./src/**/*.{html,svelte,js,ts}'],
 	theme: {
 		screens: {
 			sm: {
