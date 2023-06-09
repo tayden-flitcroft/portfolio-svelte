@@ -8,7 +8,7 @@ import type { ANALYTICS_EVENT_NAME } from './constants'
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
 	authDomain: 'portfolio-svelte-2198.firebaseapp.com',
-	databaseURL: 'https://portfolio-svelte-2198.firebaseio.com',
+	databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
 	projectId: 'portfolio-svelte-2198',
 	storageBucket: 'portfolio-svelte-2198.appspot.com',
 	messagingSenderId: '338745272218',
