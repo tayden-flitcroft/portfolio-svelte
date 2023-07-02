@@ -6,12 +6,6 @@
 	import { onMount } from 'svelte'
 	import { getContactInformation } from '../../helpers/firebase'
 
-	interface ContactInformation {
-		email: string
-		address: string
-		phoneNumber: string
-	}
-
 	enum FormSubmissionState {
 		'ERROR',
 		'INITIAL',
@@ -169,7 +163,7 @@
 <div class="flex justify-around gap-3 sm:flex-col sm:gap-10">
 	<div class="flex flex-col sm:w-fit sm:self-start">
 		<a
-			href="https://maps.google.com/?q={contactInformation?.address}"
+			href={`https://maps.google.com/?q=${contactInformation?.address.city}, ${contactInformation?.address.state}`}
 			target="_blank"
 			class="open-sans group flex items-center gap-4 text-lg"
 		>
@@ -178,7 +172,9 @@
 				height="25"
 				class="rounded-full border border-transparent bg-accent p-3 transition duration-300 ease-in-out group-hover:bg-main group-hover:text-white"
 			/>
-			<span class="text-gray-600"> {contactInformation?.address} </span>
+			<span class="text-gray-600">
+				{contactInformation?.address.city}, {contactInformation?.address.state}
+			</span>
 		</a>
 		<a
 			class="open-sans group my-11 flex items-center gap-4 text-lg"

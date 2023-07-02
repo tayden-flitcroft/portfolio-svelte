@@ -32,6 +32,29 @@ declare global {
         type?: string
         autocomplete?: string
     }
+
+    interface ContactInformation {
+        age: number
+		email: string
+		address: {
+			city: string
+			state: string
+		}
+		phoneNumber: string
+        birthday: {
+            day: number
+            year: number
+            month: number
+        }
+	}
+
+    interface NormalizedContactInformation {
+        age: number
+        email: string
+        address: string
+        'Phone Number': string
+        birthday: string
+    }
     
     module 'svelte-hamburgers'
 }

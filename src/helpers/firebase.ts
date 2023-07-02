@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getAnalytics, logEvent } from 'firebase/analytics'
-import { connectDatabaseEmulator, get, getDatabase, ref } from 'firebase/database'
-import { connectStorageEmulator, getStorage } from 'firebase/storage'
+import { connectDatabaseEmulator, ref as dbRef, get, getDatabase } from 'firebase/database'
+import { connectStorageEmulator, getBlob, getDownloadURL, getStorage, ref as storageRef } from 'firebase/storage'
 import type { ANALYTICS_EVENT_NAME } from './constants'
 
 const firebaseConfig = {
@@ -32,15 +32,17 @@ export const fireEvent = (eventName: ANALYTICS_EVENT_NAME, data = {}): void => {
 }
 
 export const getContactInformation = async () => {
-	const dbRef = ref(db, 'contactInformation')
-	return get(dbRef).then(snapshot => {
+	return get(dbRef(db, 'contactInformation')).then(snapshot => {
 		return snapshot.val()
 	})
 }
 
 export const getAboutMeContent = async () => {
-	const dbRef = ref(db, 'aboutMeContent')
-	return get(dbRef).then(snapshot => {
+	return get(dbRef(db, 'aboutMeContent')).then(snapshot => {
 		return snapshot.val()
 	})
+}
+
+export const getHeadshotPhoto = async () => {
+	return await getDownloadURL(storageRef(storage, 'headshot.webp'))
 }

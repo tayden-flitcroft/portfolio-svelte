@@ -23,9 +23,8 @@ export default defineConfig(() => {
 	]
 
 	if (process.env.NODE_ENV === 'development') {
-		plugins.push(mix({
-			handler: './mock-routes.ts'
-		})
+		// @ts-ignore
+		plugins.push(mix({ handler: './mock-routes.ts' })
 		)
 	}
 	

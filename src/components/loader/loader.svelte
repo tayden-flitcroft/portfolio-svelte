@@ -1,16 +1,23 @@
 <style global lang="scss">
 	.four-dots {
 		&:before {
-			// need to validate
 			box-shadow: 20px 0 0 5px var(--main), 0 20px 0 5px var(--complementary),
 				0 (20px * -1) 0 5px var(--complementary), -(20px) 0 0 5px var(--main);
 		}
 	}
-
-	body {
-		cursor: progress;
-	}
 </style>
+
+<script lang="ts">
+	import { onDestroy, onMount } from 'svelte'
+
+	onMount(() => {
+		document.body.classList.add('cursor-progress')
+	})
+
+	onDestroy(() => {
+		document.body.classList.remove('cursor-progress')
+	})
+</script>
 
 <div class="">
 	<div
